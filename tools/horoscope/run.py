@@ -3,7 +3,7 @@ import random
 
 from dateutil.parser import parse
 
-from fortunes.fortunes import LIST_OF_FORTUNES
+from fortunes import fortunes
 
 
 def main():
@@ -49,7 +49,7 @@ def main():
             astrological_sign = 'pisces'.upper()
         print('... your sign is: {}'.format(astrological_sign))
 
-        fortune = LIST_OF_FORTUNES[random.randint(0, len(LIST_OF_FORTUNES) - 1)]
+        fortune = fortunes.get_fortune()
         print('... your horoscope for today: {}'.format(fortune))
 
         lucky_numbers = []

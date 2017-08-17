@@ -1,9 +1,8 @@
-from datetime import date
-import random
-
 from dateutil.parser import parse
 
-from fortunes import fortunes
+from results import fortunes
+from results import numbers
+from tools.horoscope import signs
 
 
 def main():
@@ -21,41 +20,13 @@ def main():
     if birthday:
         print('\nOkay, since your birthday is on {:%B %-d}'.format(birthday))
 
-        astrological_sign = None
-        if date(birthday.year, 3, 21) <= birthday.date() <= date(birthday.year, 4, 19):
-            astrological_sign = 'aries'.upper()
-        elif date(birthday.year, 4, 20) <= birthday.date() <= date(birthday.year, 5, 20):
-            astrological_sign = 'taurus'.upper()
-        elif date(birthday.year, 5, 21) <= birthday.date() <= date(birthday.year, 6, 20):
-            astrological_sign = 'gemini'.upper()
-        elif date(birthday.year, 6, 21) <= birthday.date() <= date(birthday.year, 7, 22):
-            astrological_sign = 'cancer'.upper()
-        elif date(birthday.year, 7, 23) <= birthday.date() <= date(birthday.year, 8, 22):
-            astrological_sign = 'leo'.upper()
-        elif date(birthday.year, 8, 23) <= birthday.date() <= date(birthday.year, 9, 22):
-            astrological_sign = 'virgo'.upper()
-        elif date(birthday.year, 9, 23) <= birthday.date() <= date(birthday.year, 10, 21):
-            astrological_sign = 'libra'.upper()
-        elif date(birthday.year, 10, 23) <= birthday.date() <= date(birthday.year, 11, 21):
-            astrological_sign = 'scorpio'.upper()
-        elif date(birthday.year, 11, 22) <= birthday.date() <= date(birthday.year, 12, 22):
-            astrological_sign = 'sagittarius'.upper()
-        elif (date(birthday.year - 1, 12, 22) <= birthday.date() <= date(birthday.year + 1, 1, 19) or
-                date(birthday.year, 12, 22) <= birthday.date() <= date(birthday.year + 1, 1, 19)):
-            astrological_sign = 'capricorn'.upper()
-        elif date(birthday.year, 1, 20) <= birthday.date() <= date(birthday.year, 2, 18):
-            astrological_sign = 'aquarius'.upper()
-        elif date(birthday.year, 2, 19) <= birthday.date() <= date(birthday.year, 3, 20):
-            astrological_sign = 'pisces'.upper()
-        print('... your sign is: {}'.format(astrological_sign))
+        astrological_sign = signs.get_sign(birthday)
+        print('... your sign is: {}'.format(astrological_sign.upper()))
 
         fortune = fortunes.get_fortune()
         print('... your horoscope for today: {}'.format(fortune))
 
-        lucky_numbers = []
-        for _ in range(5):
-            lucky_numbers.append(random.randint(1, 99))
-        lucky_numbers.sort()
+        lucky_numbers = numbers.get_lucky_numbers()
         print('... your lucky numbers are: {}'.format(' '.join(str(n) for n in lucky_numbers)))
         print('\n\n')
 

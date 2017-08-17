@@ -2,7 +2,7 @@ import builtins
 import mock
 import pytest
 
-from horoscope import run
+from tools.horoscope import run
 
 
 @pytest.mark.parametrize('birthday, expected_sign', (

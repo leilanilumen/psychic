@@ -20,7 +20,7 @@ def main():
     if birthday:
         print('\nOkay, since your birthday is on {:%B %-d}'.format(birthday))
 
-        astrological_sign = signs.get_sign(birthday)
+        astrological_sign = signs.get_sign(birthday.date())
         print('... your sign is: {}'.format(astrological_sign.upper()))
 
         fortune = fortunes.get_fortune()

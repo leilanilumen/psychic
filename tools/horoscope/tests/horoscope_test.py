@@ -1,41 +1,40 @@
 import builtins
+from datetime import date
 import mock
 import pytest
 
 from tools.horoscope import run
+from tools.horoscope import signs
 
 
 @pytest.mark.parametrize('birthday, expected_sign', (
-    ('3/21/1950', 'ARIES'),
-    ('4/19/1950', 'ARIES'),
-    ('4/20/1950', 'TAURUS'),
-    ('5/20/1950', 'TAURUS'),
-    ('5/21/1950', 'GEMINI'),
-    ('6/20/1950', 'GEMINI'),
-    ('6/21/1950', 'CANCER'),
-    ('7/22/1950', 'CANCER'),
-    ('7/23/1950', 'LEO'),
-    ('8/22/1950', 'LEO'),
-    ('8/23/1950', 'VIRGO'),
-    ('9/22/1950', 'VIRGO'),
-    ('9/23/1950', 'LIBRA'),
-    ('10/22/1950', 'LIBRA'),
-    ('10/23/1950', 'SCORPIO'),
-    ('11/21/1950', 'SCORPIO'),
-    ('11/22/1950', 'SAGITTARIUS'),
-    ('12/21/1950', 'SAGITTARIUS'),
-    ('12/22/1950', 'CAPRICORN'),
-    ('1/19/1950', 'CAPRICORN'),
-    ('1/20/1950', 'AQUARIUS'),
-    ('2/18/1950', 'AQUARIUS'),
-    ('2/19/1950', 'PISCES'),
-    ('3/20/1950', 'PISCES'),
+    (date(1950, 3, 21), 'aries'),
+    (date(1950, 4, 19), 'aries'),
+    (date(1950, 4, 20), 'taurus'),
+    (date(1950, 5, 20), 'taurus'),
+    (date(1950, 5, 21), 'gemini'),
+    (date(1950, 6, 20), 'gemini'),
+    (date(1950, 6, 21), 'cancer'),
+    (date(1950, 7, 22), 'cancer'),
+    (date(1950, 7, 23), 'leo'),
+    (date(1950, 8, 22), 'leo'),
+    (date(1950, 8, 23), 'virgo'),
+    (date(1950, 9, 22), 'virgo'),
+    (date(1950, 9, 23), 'libra'),
+    (date(1950, 10, 22), 'libra'),
+    (date(1950, 10, 23), 'scorpio'),
+    (date(1950, 11, 21), 'scorpio'),
+    (date(1950, 11, 22), 'sagittarius'),
+    (date(1950, 12, 21), 'sagittarius'),
+    (date(1950, 12, 22), 'capricorn'),
+    (date(1950, 1, 19), 'capricorn'),
+    (date(1950, 1, 20), 'aquarius'),
+    (date(1950, 2, 18), 'aquarius'),
+    (date(1950, 2, 19), 'pisces'),
+    (date(1950, 3, 20), 'pisces'),
 ))
-def test_astrological_sign(birthday, expected_sign, capsys):
-    with mock.patch.object(builtins, 'input', lambda _: birthday):
-        run.main()
-        output, _ = capsys.readouterr()
-        assert bool(set(output) & set(expected_sign))
+def test_get_sign(birthday, expected_sign):
+    assert signs.get_sign(birthday) == expected_sign
 
 
 @pytest.mark.parametrize('invalid_birthday', (

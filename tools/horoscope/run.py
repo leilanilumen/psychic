@@ -5,30 +5,45 @@ from results import numbers
 from tools.horoscope import signs
 
 
-def main():
+def get_birthday():
     birthday_prompt = ('\nYay, let\'s get started! What is your birthday?\n\n')
     birthday_input = input(birthday_prompt)
-    print('')
+    return parse(birthday_input)
 
-    birthday = None
+
+def print_birthday_error():
+    print('\nYikes, invalid birthday')
+
+
+def get_magical_results(birthday):
+    sign = signs.get_sign(birthday.date())
+    fortune = fortunes.get_fortune()
+    lucky_numbers = numbers.get_lucky_numbers()
+
+    return {
+        'fortune': fortune,
+        'lucky_numbers': lucky_numbers,
+        'sign': sign,
+    }
+
+
+def print_results(birthday, results):
+    print('\nOkay, since your birthday is on {:%B %-d}'.format(birthday))
+    print('... your sign is: {}'.format(results['sign'].upper()))
+    print('... your horoscope for today: {}'.format(results['fortune']))
+    print('... your lucky numbers are: {}'
+          .format(' '.join(str(n) for n in results['lucky_numbers'])))
+
+
+def main():
     try:
-        birthday = parse(birthday_input)
+        birthday = get_birthday()
+        results = get_magical_results(birthday)
+        print_results(birthday, results)
     except ValueError:
-        print('blah, invalid birthday')
-        print('\n\n')
+        print_birthday_error()
 
-    if birthday:
-        print('\nOkay, since your birthday is on {:%B %-d}'.format(birthday))
-
-        astrological_sign = signs.get_sign(birthday.date())
-        print('... your sign is: {}'.format(astrological_sign.upper()))
-
-        fortune = fortunes.get_fortune()
-        print('... your horoscope for today: {}'.format(fortune))
-
-        lucky_numbers = numbers.get_lucky_numbers()
-        print('... your lucky numbers are: {}'.format(' '.join(str(n) for n in lucky_numbers)))
-        print('\n\n')
+    print()  # yes add another line break
 
 
 if __name__ == '__main__':

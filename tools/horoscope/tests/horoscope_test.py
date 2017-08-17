@@ -44,8 +44,7 @@ def test_get_sign(birthday, expected_sign):
     'not_a_date',
     '12/35/1988'
 ))
-def test_valid_birthday(invalid_birthday, capsys):
+def test_valid_birthday(invalid_birthday):
     with mock.patch.object(builtins, 'input', lambda _: invalid_birthday):
-        run.main()
-        output, _ = capsys.readouterr()
-        assert output == '\nblah, invalid birthday\n\n\n\n'
+        with pytest.raises(ValueError):
+            run.get_birthday()

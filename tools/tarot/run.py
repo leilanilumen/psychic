@@ -1,1 +1,1 @@
-print 'this is your horoscope'
+print 'this is your tarot reading'

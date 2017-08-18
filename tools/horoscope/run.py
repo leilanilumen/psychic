@@ -3,7 +3,7 @@ import random
 
 from dateutil.parser import parse
 
-from fortunes import fortunes
+from results import fortunes
 
 
 def main():

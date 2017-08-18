@@ -3,6 +3,8 @@ import random
 
 from dateutil.parser import parse
 
+from fortunes import fortunes
+
 
 def main():
     birthday_prompt = ('\nYay, let\'s get started! What is your birthday?\n\n')
@@ -47,14 +49,7 @@ def main():
             astrological_sign = 'pisces'.upper()
         print('... your sign is: {}'.format(astrological_sign))
 
-        fortunes = [
-            'You will not win the lottery, sadz',
-            'Be careful walking across cracks in the pavement',
-            'Love will wax and wane',
-            'You will not adopt a dog',
-            'A mysterious stranger will offer you a chance of a lifetime'
-        ]
-        fortune = fortunes[random.randint(0, len(fortunes) - 1)]
+        fortune = fortunes.get_fortune()
         print('... your horoscope for today: {}'.format(fortune))
 
         lucky_numbers = []

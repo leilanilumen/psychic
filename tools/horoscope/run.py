@@ -2,7 +2,7 @@ from dateutil.parser import parse
 
 from results import fortunes
 from results import numbers
-from tools.horoscope import signs
+import signs
 
 
 def main():
